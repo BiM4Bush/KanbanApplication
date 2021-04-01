@@ -1,3 +1,3 @@
 # KanbanApplication
 
-Firebase(back+db) + Angular(front)
+Firebase(back-end+db) + Angular(front-end)
