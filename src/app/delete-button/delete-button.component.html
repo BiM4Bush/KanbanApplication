@@ -1,0 +1,11 @@
+<button
+  mat-button
+  color="cold"
+  (click)="canDelete ? confirmDelete() : selectForDelete()"
+>
+  <mat-icon> delete </mat-icon>
+  <span *ngIf="canDelete"> Potwierdź </span>
+</button>
+<button mat-button *ngIf="canDelete" (click)="unSelectForDelete()">
+  Anuluj
+</button>

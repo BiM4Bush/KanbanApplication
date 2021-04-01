@@ -1,0 +1,30 @@
+@import "../../../styles.scss";
+#form-container {
+  @include flx(center, stretch, column);
+  & > div {
+    @include flx(center, center, column);
+  }
+  & > form {
+    @include flx(center, stretch, column);
+    & mat-form-field {
+      min-width: 320px;
+    }
+    button[type="submit"] {
+      min-width: 200px;
+      margin: auto;
+      margin-top: 7px;
+      margin-bottom: 4px;
+     
+    }
+  }
+  color: white;
+}
+button {
+  min-width: 200px;
+  margin: auto;
+  
+}
+
+.error-message {
+  color: map-get($angular-application-warn, 500);
+}

@@ -1,0 +1,28 @@
+<style>
+  mat-form-field {
+    width: 100%;
+  }
+</style>
+
+<h1 mat-dialog-title>Dodaj kolumnę</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Nazwa</mat-label>
+    <input matInput [(ngModel)]="data.name" required />
+    <mat-error> Wymagane </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label >Limit</mat-label>
+    <input matInput [(ngModel)]="data.limit" value="0"  />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button
+    mat-but
+    [disabled]="!data.name"
+    [mat-dialog-close]="data"
+    cdkFocusInitial
+  >
+    Dodaj
+  </button>
+</div>

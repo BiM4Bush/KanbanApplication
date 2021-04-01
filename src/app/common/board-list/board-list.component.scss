@@ -1,0 +1,64 @@
+@import "../../../styles.scss";
+//Kolumny
+.board-container {
+  width: 100%;
+  //Pozycja kolumn
+  padding-left: 140px;
+  padding-right: 140px;
+  padding-top: 110px;
+  height: calc(100vh - 74px);
+  @include flx(flex-start, flex-start);
+  overflow-x: auto;
+  &.cdk-drop-list-dragging {
+    border: 2px dashed map-get($primary, A900);
+  }
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: map-get($secondary, 100);
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar {
+    height: 10px;
+    background-color: map-get($secondary, 700);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: map-get($secondary, 700);
+    border-radius: 10px;
+    background-image: -webkit-linear-gradient(0deg, rgba(0, 0, 0));
+  }
+}
+//Przycisk dodawania - pozycja
+.button-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+}
+
+//Drag and drop
+.drag-handle {
+  cursor: move;
+  z-index: 10;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.2;
+}
+
+.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 300ms ease;
+}
+.cdk-drag-animation {
+  transition: transform 30000ms ease;
+}
+@media (max-width: 599px) {
+  .board-container {
+    height: calc(100vh - 56px);
+    @include flx(flex-start, stretch, column);
+    overflow-y: auto;
+    overflow-x: hidden;
+        
+  }
+}

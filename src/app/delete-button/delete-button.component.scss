@@ -1,0 +1,8 @@
+@import "../../styles.scss";
+button {
+  width: fit-content;
+  display: inline-block;
+  mat-icon {
+    min-width: 35px;
+  }
+}

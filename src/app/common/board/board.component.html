@@ -1,0 +1,105 @@
+<mat-card class="board"
+[ngStyle]="board.tasks.length > board.limit && board.limit !=0 && {'background-color': 'rgb(192, 11, 11, 0.5)'} ">
+  <div class="head"
+  >
+    <mat-card-title
+    >
+      <span *ngIf="!canEdit">
+        {{ board.title }}
+      </span>
+      <mat-form-field class="input" *ngIf="canEdit">
+        <input matInput [(ngModel)]="newBoardTitle" required />
+      </mat-form-field>
+
+    </mat-card-title
+    >
+    <div >
+      <p>
+        {{ board.tasks.length }} / {{board.limit}}
+      </p>
+      
+      <button
+        mat-icon-button
+        color="white"
+        *ngIf="!canEdit"
+        (click)="makeTitleEditable()"
+      >
+        <mat-icon> edit </mat-icon>
+      </button>
+      
+      <button
+        mat-icon-button
+        color="white"
+        *ngIf="canEdit && newBoardTitle"
+        (click)="updateBoardTitle()"
+      >
+        <mat-icon> done </mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="white"
+        *ngIf="canEdit && !newBoardTitle"
+        (click)="closeEditOpt()"
+      >
+        <mat-icon> clear </mat-icon>
+      </button>
+
+      <ng-content></ng-content>
+    </div>
+  </div>
+  <div class="sub-heading">
+    <mat-card-subtitle> </mat-card-subtitle>
+  </div>
+  <mat-card-content
+    class="tasks"
+    cdkDropList
+    [cdkDropListData]="board"
+    cdkDropListOrientation="vertical"
+    (cdkDropListDropped)="taskDrop($event)"
+
+  >
+    <mat-card
+      cdkDrag
+      cdkDragDisabled
+      *ngIf="board.tasks.length === 0"
+      style="background-color: rgb(192, 11, 11, 0); color: inherit; margin-bottom: 10px ;font-size: 27px; box-shadow: none; text-align: center; font-weight: 500;"
+    >
+      Brak tasków
+    </mat-card>
+    <mat-card
+    cdkDrag
+    [cdkDragHandle] = "board.tasks.length > board.limit &&  board.limit !=0"
+    *ngIf="board.tasks.length > board.limit &&  board.limit !=0"
+    style="background-color: rgb(192, 11, 11, 0 ); color: inherit; margin-bottom: 10px; ;font-size: 27px; box-shadow: none; font-weight: 500; text-align: center;"
+    cdkDragDisabled
+   
+  >
+  Przekroczono limit
+  </mat-card>
+    <div
+      class="inner-card"
+      cdkDrag
+      *ngFor="let task of board.tasks ; let i = index  "
+      [cdkDropListEnterPredicate] = "evenPredicate"
+    >
+      <mat-card [ngClass]="task.label" (click)="openDialog(task, i)" style="font-size: 16px; font-weight: 430;">
+        {{ task.description }}
+      </mat-card>
+    </div>
+  </mat-card-content>
+  <mat-card-actions >
+    <mat-form-field class="input"
+    *ngIf="canEdit"
+    
+    >
+      <input matInput 
+      [(ngModel)]="newBoardLimit" 
+      required  />
+    </mat-form-field>
+
+    <button mat-mini-fab color="primary" (click)="openDialog()" [disabled]="board.tasks.length > board.limit && board.limit !=0">
+      <mat-icon> add </mat-icon>
+    </button>
+    <app-delete-button (delete)="deleteBorad()"> </app-delete-button>
+  </mat-card-actions>
+</mat-card>

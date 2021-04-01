@@ -1,0 +1,97 @@
+<div id="form-container">
+  <div *ngIf="isSignup">
+    <h3>Utwórz konto</h3>
+    <button mat-stroked-button (click)="changeType('login')">
+      Masz już konto? Zaloguj się
+    </button>
+  </div>
+
+  <div *ngIf="isLogin">
+    <h3>Zaloguj się </h3>
+  </div>
+
+  <div *ngIf="isPasswordReset">
+    <h3>Zresetuj hasło</h3>
+    <button size="small" mat-button (click)="changeType('login')">Wróć</button>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field [color]="email.valid && 'primary'">
+      <input
+        matInput
+        formControlName="email"
+        type="email"
+        placeholder="Email"
+        autocomplete="off"
+      />
+      <mat-error *ngIf="email.invalid && email.dirty">
+        Wprowadź prawidłowy adres email
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field
+      [color]="password.valid && 'primary'"
+      *ngIf="!isPasswordReset"
+    >
+      <input
+        matInput
+        formControlName="password"
+        type="password"
+        placeholder="Hasło"
+        autocomplete="off"
+      />
+      <mat-error *ngIf="password.invalid && password.dirty">
+        Hasło powinno składać się z conajmniej 8 znaków
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field
+      [color]="confirmPassword.valid && 'primary'"
+      *ngIf="!isPasswordReset && !isLogin"
+    >
+      <input
+        matInput
+        formControlName="confirmPassword"
+        type="password"
+        placeholder="Potwierdź hasło"
+        autocomplete="off"
+      />
+      <mat-error *ngIf="confirmPassword.invalid && confirmPassword.dirty">
+        Hasło powinno składać się z conajmniej 8 znaków
+      </mat-error>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="
+        loading ||
+        (isLogin && (email.invalid || password.invalid)) ||
+        (isSignup &&
+          (email.invalid ||
+            password.invalid ||
+            confirmPassword.value !== password.value)) ||
+        (isPasswordReset && email.invalid)
+      "
+    >
+      <span *ngIf="isLogin"> Zaloguj </span>
+      <span *ngIf="isSignup"> Zarejestruj </span>
+      <span *ngIf="isPasswordReset"> Wyślij </span>
+    </button>
+  </form>
+
+  <button
+    mat-button
+    *ngIf="isLogin && !isPasswordReset"
+    (click)="changeType('reset')"
+  >
+  Zapomniałem hasła
+  </button>
+  <button
+    size="small"
+    mat-button
+    *ngIf="isLogin"
+    (click)="changeType('signup')"
+  >
+  Jesteś tu po raz pierwszy? Zarejestruj się
+  </button>
+  <p class="error-message">{{ serverMessage }}</p>
+</div>

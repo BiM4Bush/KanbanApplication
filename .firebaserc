@@ -1,0 +1,22 @@
+{
+  "targets": {
+    "aprzerzutnikkanbanbackend": {
+      "hosting": {
+        "angular-application": [
+          "przerzutnikkanbanbackend"
+        ]
+      }
+    },
+    "projektvue-2fb00": {
+      "hosting": {
+        "angular-application": [
+          "projektvue-2fb00"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "przerzutnikkanbanbackend",
+    "kanban": "przerzutnikkanbanbackend"
+  }
+}

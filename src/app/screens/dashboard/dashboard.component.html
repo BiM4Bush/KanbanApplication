@@ -1,0 +1,9 @@
+<div *ngIf="!(afAuth.authState | async)">
+  <div class="information">
+    <mat-card-title> Tablica niedostępna! </mat-card-title>
+    <p *ngIf="true">
+      <a routerLink="/login">Zaloguj się </a> by móc korzystać z aplikacji
+    </p>
+  </div>
+</div>
+<app-board-list *ngIf="afAuth.authState | async"> </app-board-list>

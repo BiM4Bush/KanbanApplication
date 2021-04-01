@@ -1,0 +1,88 @@
+@import "../../../styles.scss";
+//Ustawienia css dotyczace paska 
+mat-toolbar.header {
+  position: fixed;
+  width: 100vw;
+  z-index: 99;
+  padding: 0px 100px;
+  box-shadow: $default-shadow;
+  @include flx(space-between, stretch);
+  span {
+    padding: auto;
+    @include flx;
+  }
+  mat-nav-list {
+    @include flx(flex-end, stretch, row, nowrap);
+    padding-top: 0px;
+    a {
+      height: 100%;
+      display: inline-block;
+      @include flx;
+      color: map-get($primary, "A400-contrast");
+      transition: background 300ms ease;
+    }
+    .user-highlight {
+      @include flx;
+      height: 100%;
+      background-color: map-get($primary, 300) !important;
+    }
+    a:hover {
+      background-color: map-get($primary, 300);
+    }
+  }
+}
+//avatar na navbarze (dziala tylko z kontem google)
+.account-photo {
+  height: calc(100% - 25px);
+  box-shadow: $default-shadow;
+  border-radius: 50%;
+}
+.screen-container {
+  min-height: 100vh;
+  background-color: map-get($primary, 100);
+}
+
+mat-sidenav.sidenav {
+  min-width: 250px;
+  background-color: map-get($primary, 100);
+  mat-nav-list {
+    padding-top: 0px;
+    a {
+      color: map-get($primary, "100-contrast");
+    }
+  }
+  mat-toolbar {
+    background-color: map-get($primary, 500);
+    color: map-get($primary, "500-contrast");
+  }
+  .user-highlight {
+    @include flx;
+    height: fit-content !important;
+    min-height: 56px;
+    background-color: map-get($primary, 500) !important;
+    .user-grp {
+      @include flx(center, center, column);
+      img {
+        height: 80px;
+        margin: auto;
+      }
+      span {
+        width: 100%;
+        display: inline-block;
+        margin: 10px;
+        color: map-get($primary, "300-contrast");
+      }
+    }
+  }
+}
+
+@media (max-width: 960px) {
+  mat-toolbar.header {
+    padding: 0px 10px;
+    @include flx(flex-start, stretch);
+    button {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+}

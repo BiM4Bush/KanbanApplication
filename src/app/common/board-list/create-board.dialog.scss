@@ -1,0 +1,6 @@
+@import "../../../styles.scss";
+
+//Kolor kolumny
+.mat-dialog-container {
+  background-color: map-get($primary, A300);
+}

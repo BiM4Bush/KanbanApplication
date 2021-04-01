@@ -1,0 +1,97 @@
+<mat-sidenav-container class="sidebar-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandSet$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandSet$ | async) ? 'over' : 'side'"
+    [opened]="false"
+  >
+    <mat-toolbar *ngIf="!(afAuth.authState | async)" class="sidenav-header">
+      <span>🏗  Kanban Board</span>
+    </mat-toolbar>
+    <mat-nav-list role="list" *ngIf="isHandSet$ | async">
+      <a
+        mat-list-item
+        class="user-highlight"
+        routerLink="/login"
+        disableRipple
+        *ngIf="afAuth.authState | async as user"
+      >
+        <div class="user-grp">
+          <img
+            class="account-photo"
+            *ngIf="user.photoURL"
+            [src]="user.photoURL"
+            [alt]="user.email + ' photo'"
+          />
+          <span> {{ user.email }} </span>
+        </div>
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/"> 🏠 Home </a>
+      <a mat-list-item routerLink="/login" *ngIf="!(afAuth.authState | async)">
+        Login
+      </a>
+
+      <a mat-list-item routerLink="/dashboard" *ngIf="afAuth.authState | async">
+        Kanban
+      </a>
+      <a mat-list-item routerLink="/login" *ngIf="afAuth.authState | async">
+        Wyloguj się
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="header">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandSet$ | async"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span routerLink="/"> 🏗  Kanban Board</span>
+      <mat-nav-list role="list" *ngIf="!(isHandSet$ | async)">
+        <a mat-list-item routerLink="/"> 🏠 Home </a>
+        <a
+          mat-list-item
+          routerLink="/login"
+          *ngIf="!(afAuth.authState | async)"
+        >
+          Login
+        </a>
+        <a
+          mat-list-item
+          routerLink="/dashboard"
+          *ngIf="afAuth.authState | async"
+        >
+        📌 Kanban
+        </a>
+        <a
+          class="user-highlight"
+          mat-list-item
+          routerLink="/login"
+          disableRipple
+          *ngIf="afAuth.authState | async as user"
+        >
+          <img
+            class="account-photo"
+            *ngIf="user.photoURL"
+            [src]="user.photoURL"
+            [alt]="user.email + ' photo'"
+          />
+          <span *ngIf="!user.photoURL">
+            {{ user.email }}
+          </span>
+        </a>
+      </mat-nav-list>
+    </mat-toolbar>
+    <div class="screen-container">
+      <mat-toolbar></mat-toolbar>
+      <ng-content></ng-content>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

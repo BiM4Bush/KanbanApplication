@@ -1,0 +1,117 @@
+@import "../../../styles.scss";
+.board {
+  background-color: map-get($primary, 400);
+  color: map-get($primary, "400-contrast");
+  height: auto;
+  margin: 10px;
+  & > .head {
+    width: 350px;
+    @include flx(flex-start, center);
+    & > mat-card-title {
+      flex: 1;
+      white-space: nowrap;
+      margin-bottom: 0px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+  & > .sub-heading {
+    width: 350px;
+    
+    @include flx(flex-start, flex-start);
+    & > mat-card-subtitle {
+      color: map-get($primary, "400-contrast");
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+
+  
+
+
+}
+//Taski
+.inner-card {
+  & > mat-card {
+    margin-bottom: 7px;
+  }
+}
+.pink{
+  background-color: #F2637E;
+  color: #eee;
+  font-weight: 500;
+}
+
+.yellow {
+  background-color: #F26B1D;
+  color:mintcream;
+  font-weight: 500;
+}
+.blue {
+  background-color: #10a3eb;
+  color: #eee;
+  font-weight: 500;
+}
+
+.green {
+  background-color: #3ac166;
+  color: #eee;
+  font-weight: 500;
+}
+.red {
+  background-color: #8C233F;
+  color: #eee;
+  font-weight: 500;
+}
+//Dodawanie, usuwanie ikonki pozycja
+mat-card-actions {
+  @include flx(flex-start);
+  margin-left: 140px;
+
+  
+}
+.cdk-drag-placeholder {
+  opacity: 0.2;
+}
+
+.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 300ms ease;
+}
+.cdk-drag-animation {
+  transition: transform 30000ms ease;
+}
+//Zmiana nazwy kolumny
+::ng-deep {
+  .input {
+    width: 100%;
+    .mat-form-field-wrapper {
+      color: rgb(255, 255, 255);
+      padding-bottom: 0px !important;
+      width: 100px;
+    
+      .mat-form-field-infix {
+        border-top: 0px;
+    
+      }
+    }
+    .mat-form-field-underline {
+      bottom: 0px;
+    }
+  }
+}
+@media (max-width: 599px) {
+  .board {
+    & > .head {
+      width: 100%;
+      flex: 1;
+      
+    }
+    & > .sub-heading {
+      width: 100%;
+      flex: 1;
+      
+    }
+    margin-bottom: 10px;
+  }
+}

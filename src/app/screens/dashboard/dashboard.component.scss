@@ -1,0 +1,25 @@
+@import "../../../styles.scss";
+.information
+{
+background-color: #0477BF;
+max-width: 600px;
+margin: auto;
+margin-top: 250px;
+padding: 40px 40px 60px 40px;
+text-align: center;
+@include flx(flex-start, center, column);
+p {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 15px;
+  color: aliceblue;
+  a {
+    text-decoration: none;
+    color: #D5D95B;
+    font-weight: 500;
+    cursor: pointer;
+  }
+}
+border-radius: 2%;
+color: aliceblue;
+}

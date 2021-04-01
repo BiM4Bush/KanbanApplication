@@ -1,0 +1,15 @@
+<mat-card id="auth-card">
+  <div *ngIf="!(afAuth.authState | async)">
+    <app-auth-form></app-auth-form>
+    <p>LUB</p>
+    <button mat-raised-button color="primary" appGoogleSignin>
+      Zaloguj się za pomocą konta Google
+    </button>
+  </div>
+  <div *ngIf="afAuth.authState | async as user">
+    <p>Jesteś zalogowany jako {{ user.email }}</p>
+    <button mat-stroked-button (click)="logout()">
+      Wyloguj
+    </button>
+  </div>
+</mat-card>
